@@ -18,10 +18,15 @@ const Register = () => {
     check: null,
   });
 
+  // function to check if it is a valid email
+  const isValidEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
   // function to validate form
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let value;
     //if all the input fields are filled
     if (
       data.name !== null &&
@@ -31,76 +36,113 @@ const Register = () => {
       data.email !== null &&
       data.email !== "" &&
       data.mobile !== null &&
-      data.mobile !== ""
+      data.mobile !== "" &&
+      data.check === true
     ) {
-      // if check is ticked
-      if (data.check === false) {
-        setErr({ ...err, check: "Check this box if you want to proceed" });
-      } else {
-        // if mobile length is not equal to 10
-        if (data.mobile.length !== 10) {
-          setErr({ ...err, mobileLength: "Mobile number must be 10 digits!" });
-        } else {
-          // if all conditions are fullfilled
-          if (data.mobile.length === 10) {
-            setErr({ ...err, mobileLength: null });
-          }
-          localStorage.setItem("userInfo", JSON.stringify(data));
-          setData({
-            name: null,
-            username: null,
-            email: null,
-            mobile: null,
-            check: false,
-          });
-
-          alert(
-            ` name: ${data.name} <br> username: ${data.username} <br> email: ${data.email} <br> mobile: ${data.mobile} <br> check: ${data.check}`
-          );
-        }
-      }
+      value = "all filled";
     }
 
     // if name is empty
-    if (data.name === "") {
-      setData({ ...err, name: "" });
-      setErr({ ...err, name: "name is a required field" });
+    if (data.name === "" || data.name === null) {
+      value = "empty name";
     }
     // if usernaem is empty
-    if (data.username === "") {
-      setData({ ...err, username: "" });
-      setErr({ ...err, username: "username is a required field" });
+    if (data.username === "" || data.username === null) {
+      value = "empty username";
     }
+
     // if email is empty
-    if (data.email === "") {
-      setData({ ...err, email: "" });
-      setErr({ ...err, email: "email is a required field" });
+    if (data.email === "" || data.email === null) {
+      value = "empty email";
     }
     // if mobile is empty
     if (data.mobile === "") {
-      setData({ ...err, mobile: "" });
-      setErr({ ...err, mobile: "mobile is a required field" });
+      value = "empty mobile";
     }
-    // if all is empty
+    if (data.mobile === null) {
+      value = "empty mobile";
+    }
+    // if check is ticked
+    if (data.check === false) {
+      value = "empty check";
+    }
+    // all is empty
     if (
       (data.name === null || data.name === "") &&
       (data.username === null || data.username === "") &&
       (data.email === null || data.email === "") &&
       (data.mobile === null || data.mobile === "")
     ) {
-      setData({
-        name: "",
-        username: "",
-        email: "",
-        mobile: "",
-      });
-      setErr({
-        ...err,
-        name: "name is a required field",
-        username: "username is a required field",
-        email: "email is a required field",
-        mobile: "mobile is a required field",
-      });
+      value = "all empty";
+    }
+
+    alert(value);
+
+    switch (value) {
+      case "all filled":
+        setErr({ ...err, mobileLength: null });
+        // checking if it is a valid email
+        if (isValidEmail(data.email)) {
+          // checking if the length of the phone number is equal to 10
+          if (data.mobile.length === 10) {
+            localStorage.setItem("userInfo", JSON.stringify(data));
+            setData({
+              name: "",
+              username: "",
+              email: "",
+              mobile: "",
+            });
+          } else {
+            setErr({
+              ...err,
+              mobileLength: "Mobile number must be 10 digits!",
+            });
+            alert("incorrect mobile length");
+          }
+        } else {
+          setData({ ...data, email: "" });
+          setErr({ ...err, email: "invalid email" });
+        }
+
+        break;
+      case "empty name":
+        setData({ ...data, name: "" });
+        setErr({ ...err, name: "name is a required field" });
+        break;
+      case "empty username":
+        setData({ ...data, username: "" });
+        setErr({ ...err, username: "username is a required field" });
+        break;
+      case "empty email":
+        setData({ ...data, email: "" });
+        setErr({ ...err, email: "email is a required field" });
+        break;
+      case "empty mobile":
+        setData({ ...data, mobile: "" });
+        setErr({ ...err, mobile: "mobile is a required field" });
+        break;
+      case "empty check":
+        setErr({ ...err, check: "Check this box if you want to proceed" });
+        break;
+      case "all empty":
+        setData({
+          name: "",
+          username: "",
+          email: "",
+          mobile: "",
+          check: false,
+        });
+        setErr({
+          ...err,
+          name: "name is a required field",
+          username: "username is a required field",
+          email: "email is a required field",
+          mobile: "mobile is a required field",
+          check: "Check this box if you want to proceed",
+        });
+        break;
+      default:
+        return null;
     }
   };
 
@@ -147,8 +189,8 @@ const Register = () => {
             placeholder="Mobile"
             value={data.mobile}
             // prevent entering unwanted characters in input field
-            onKeyDown={(evt) =>
-              ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
+            onKeyDown={(e) =>
+              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }
             onChange={(e) => setData({ ...data, mobile: e.target.value })}
           />
@@ -175,9 +217,6 @@ const Register = () => {
               <p className={style.errorTextCheck}>{err.check}</p>
             )}
           </div>
-          {/* {data.check === false && (
-            <p className={style.errorTextCheck}>{err.check}</p>
-          )} */}
           <button>SIGN UP</button>
           <p>
             By clicking on Sign up. you agree to Superapp
