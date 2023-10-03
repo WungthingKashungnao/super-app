@@ -76,8 +76,6 @@ const Register = () => {
       value = "all empty";
     }
 
-    alert(value);
-
     switch (value) {
       case "all filled":
         setErr({ ...err, mobileLength: null });
@@ -97,7 +95,6 @@ const Register = () => {
               ...err,
               mobileLength: "Mobile number must be 10 digits!",
             });
-            alert("incorrect mobile length");
           }
         } else {
           setData({ ...data, email: "" });
