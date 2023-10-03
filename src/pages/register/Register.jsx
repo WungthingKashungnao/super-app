@@ -1,5 +1,6 @@
 import { useState } from "react";
 import style from "./register.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -17,6 +18,7 @@ const Register = () => {
     mobileLength: null,
     check: null,
   });
+  const navigate = useNavigate();
 
   // function to check if it is a valid email
   const isValidEmail = (email) => {
@@ -84,12 +86,13 @@ const Register = () => {
           // checking if the length of the phone number is equal to 10
           if (data.mobile.length === 10) {
             localStorage.setItem("userInfo", JSON.stringify(data));
-            setData({
-              name: "",
-              username: "",
-              email: "",
-              mobile: "",
-            });
+            navigate("selectCategory");
+            // setData({
+            //   name: "",
+            //   username: "",
+            //   email: "",
+            //   mobile: "",
+            // });
           } else {
             setErr({
               ...err,

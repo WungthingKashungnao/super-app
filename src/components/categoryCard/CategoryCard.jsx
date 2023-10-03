@@ -11,7 +11,10 @@ const CategoryCard = () => {
         <div
           key={data.value}
           className={styles.container}
-          style={{ backgroundColor: `${data.bgColor}` }}
+          style={{
+            backgroundColor: `${data.bgColor}`,
+            border: `${data.isSelected && "5px solid #11B800"} `,
+          }}
           onClick={() => handleCtgData(data)}
         >
           <div className={styles.text}>

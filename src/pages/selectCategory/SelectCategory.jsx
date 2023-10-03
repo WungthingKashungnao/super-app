@@ -3,7 +3,15 @@ import styles from "./selectCategory.module.css";
 import { useContext } from "react";
 import { context } from "../../context/AppContext";
 const SelectCategory = () => {
-  const { handleDelteCtg, localData } = useContext(context);
+  const { localData, handleDelteCtg, ctgData } = useContext(context);
+
+  const handleNextPage = () => {
+    if (ctgData.length >= 3) {
+      console.log("into next page");
+    } else if (ctgData.length < 3) {
+      console.log("minimun 3 categories required");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -29,6 +37,11 @@ const SelectCategory = () => {
               </button>
             ))}
         </div>
+        {ctgData.length < 3 && ctgData.length > 0 && (
+          <span className={styles.errorMessage}>
+            Minimun 3 categories required
+          </span>
+        )}
       </div>
       {/* selected category options container end */}
       {/* left container end */}
@@ -37,7 +50,9 @@ const SelectCategory = () => {
         <div className={styles.categories}>
           <CategoryCard />
         </div>
-        <button className={styles.nextPageBtn}>Next Page</button>
+        <button className={styles.nextPageBtn} onClick={() => handleNextPage()}>
+          Next Page
+        </button>
       </div>
       {/* right container end */}
     </div>

@@ -53,6 +53,12 @@
   font-weight: 800;
   color: #085c00;
 }
+.errorMessage {
+  display: block;
+  margin-top: 10px;
+  color: #ff0000;
+  font-size: 1rem;
+}
 .right {
   flex: 3;
   position: relative;
