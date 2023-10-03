@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { context } from "../../context/AppContext";
 const SelectCategory = () => {
   const { localData, handleDelteCtg, ctgData } = useContext(context);
-
   const handleNextPage = () => {
     if (ctgData.length >= 3) {
       console.log("into next page");
