@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import styles from "./homePage.module.css";
 import profilePicture from "./profilePicture.png";
 import { weatherApi } from "../../utils/api";
+import pressureLogo from "./pressureLogo.png";
+import humidLogo from "./humidLogo.png";
+import windLogo from "./windLogo.png";
 
 const HomePage = () => {
   const userData = JSON.parse(localStorage.getItem("userInfo")); //getting user info
@@ -15,8 +18,16 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    setWeather(weatherApi());
+    fetchApi();
   }, []);
+
+  // calling the api function to fetch data
+  const fetchApi = () => {
+    weatherApi().then((data) => {
+      setWeather(data);
+    });
+  };
+
   return (
     <div className={styles.container}>
       {/* left start */}
@@ -38,7 +49,7 @@ const HomePage = () => {
                 <div className={styles.userCategory}>
                   {userSavedCategory &&
                     userSavedCategory.map((data) => (
-                      <div className={styles.ctgCard} key={data.name}>
+                      <div className={styles.ctgCard} key={data.value}>
                         {data.label}
                       </div>
                     ))}
@@ -49,10 +60,44 @@ const HomePage = () => {
             {/* weather info start */}
             <div className={styles.weatherInfo}>
               <div className={styles.weatherDateTime}>
-                <h2>Date</h2>
-                <h2>Time</h2>
+                <h2>{weather?.location?.localtime.split(" ")[0]}</h2>
+                <h2>{weather?.location?.localtime.split(" ")[1]}</h2>
               </div>
-              <div className={styles.weatherData}></div>
+              <div className={styles.weatherData}>
+                <div className={styles.weatherCodition}>
+                  <div className={styles.conditionTop}>
+                    <img src={weather?.current?.condition.icon} alt="" />
+                  </div>
+                  <div className={styles.conditionBot}>
+                    <p>{weather?.current?.condition.text}</p>
+                  </div>
+                </div>
+                <div className={styles.weatherCodition}>
+                  <div className={styles.conditionTop}>
+                    <h2>{weather?.current?.feelslike_c}&deg;C</h2>
+                  </div>
+                  <div className={styles.conditionBot}>
+                    <img src={pressureLogo} alt="" />
+                    <span>
+                      {weather?.current?.pressure_mb} mbar <br /> Pressure
+                    </span>
+                  </div>
+                </div>
+                <div className={styles.weatherCodition}>
+                  <div className={styles.conditionTop}>
+                    <img src={windLogo} alt="" />
+                    <span>
+                      {weather?.current?.wind_kph} km/hr <br /> Wind
+                    </span>
+                  </div>
+                  <div className={styles.conditionBot}>
+                    <img src={humidLogo} alt="" />
+                    <span>
+                      {weather?.current?.humidity} % <br /> Humidity
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
             {/* weather info end */}
           </div>

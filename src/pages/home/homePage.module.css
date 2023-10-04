@@ -21,7 +21,7 @@
   flex: 2;
   display: flex;
   flex-direction: column;
-  gap: 1%;
+  gap: 3%;
 }
 .userInfo {
   flex: 2;
@@ -96,6 +96,39 @@
 .weatherData {
   background-color: #101744;
   flex: 3;
+  display: flex;
+}
+.weatherCodition {
+  flex: 1;
+  border-right: 1px solid #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+.weatherCodition:nth-child(3) {
+  border: none;
+}
+.conditionTop {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.conditionTop h2 {
+  font-size: 2rem;
+}
+.conditionTop img {
+  margin-right: 5%;
+}
+.conditionBot {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.conditionBot img {
+  margin-right: 5%;
 }
 .notesSection {
   flex: 1;
