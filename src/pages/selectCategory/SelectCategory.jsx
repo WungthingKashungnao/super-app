@@ -7,6 +7,7 @@ const SelectCategory = () => {
   const handleNextPage = () => {
     if (ctgData.length >= 3) {
       console.log("into next page");
+      localStorage.setItem("SavedCategories", JSON.stringify(localData)); //saving the selected categories
     } else if (ctgData.length < 3) {
       console.log("minimun 3 categories required");
     }
