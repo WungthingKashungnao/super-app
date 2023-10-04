@@ -14,7 +14,7 @@ const HomePage = () => {
   // function to handle notes
   const handleNotes = (data) => {
     setNotes(data);
-    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("notes", JSON.stringify(data));
   };
 
   useEffect(() => {
