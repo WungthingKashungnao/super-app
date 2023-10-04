@@ -1,0 +1,112 @@
+.container {
+  display: flex;
+  gap: 2%;
+  width: 100%;
+  height: 100vh;
+  padding: 4% 2%;
+  background-color: black;
+}
+.left {
+  height: 97%;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+.leftTop {
+  flex: 3;
+  border: 10px solid red;
+  display: flex;
+  gap: 2%;
+}
+.infoSection {
+  flex: 2;
+  border: 10px solid blue;
+  display: flex;
+  flex-direction: column;
+  gap: 1%;
+}
+.userInfo {
+  flex: 2;
+  border-radius: 30px;
+  display: flex;
+  gap: 1%;
+  padding: 2%;
+  background-color: #5746ea;
+}
+.profilePic {
+  flex: 1;
+}
+.profilePic img {
+  width: 100%;
+  height: 100%;
+}
+.profileData {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 2%;
+}
+.userBio {
+  flex: 1;
+  color: white;
+}
+.userBio p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 2% 0;
+}
+.userBio h4 {
+  font-size: 2rem;
+  margin: 2% 0;
+  font-weight: 500;
+}
+.userCategory {
+  flex: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2%;
+}
+
+.ctgCard {
+  width: 45%;
+  height: 17%;
+  background-color: #9f94ff;
+  padding: 3px 0;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.weatherInfo {
+  flex: 1;
+  border: 5px solid green;
+}
+.notesSection {
+  flex: 1;
+  border: 10px solid black;
+}
+.leftBot {
+  flex: 1;
+  border: 10px solid green;
+}
+.right {
+  flex: 1;
+  height: 97%;
+  border: 10px solid blue;
+  position: relative;
+}
+.browseBtn {
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  cursor: pointer;
+  background-color: #148a08;
+  color: white;
+}

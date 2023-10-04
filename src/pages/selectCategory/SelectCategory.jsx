@@ -2,12 +2,17 @@ import CategoryCard from "../../components/categoryCard/CategoryCard";
 import styles from "./selectCategory.module.css";
 import { useContext } from "react";
 import { context } from "../../context/AppContext";
+import { useNavigate } from "react-router-dom";
+
 const SelectCategory = () => {
   const { localData, handleDelteCtg, ctgData } = useContext(context);
+  const navigate = useNavigate();
+
   const handleNextPage = () => {
     if (ctgData.length >= 3) {
       console.log("into next page");
       localStorage.setItem("SavedCategories", JSON.stringify(localData)); //saving the selected categories
+      navigate("/homePage");
     } else if (ctgData.length < 3) {
       console.log("minimun 3 categories required");
     }
