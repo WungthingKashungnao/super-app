@@ -144,9 +144,9 @@ const HomePage = () => {
         <div className={styles.newsBot}>
           {news?.articles[apiNewsNo]?.content}
         </div>
-        <button className={styles.browseBtn}>Browse</button>
       </div>
       {/* right end */}
+      <button className={styles.browseBtn}>Browse</button>
     </div>
   );
 };

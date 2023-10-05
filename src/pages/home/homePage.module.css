@@ -5,6 +5,7 @@
   height: 100vh;
   padding: 4% 2%;
   background-color: black;
+  position: relative;
 }
 .left {
   height: 97%;
@@ -211,13 +212,14 @@
   padding: 3% 5%;
 }
 .browseBtn {
+  z-index: 100;
   border: none;
   outline: none;
   border-radius: 20px;
   padding: 5px 15px;
   position: absolute;
-  right: 0;
-  bottom: -50px;
+  right: 2%;
+  bottom: 2%;
   cursor: pointer;
   background-color: #148a08;
   color: white;
