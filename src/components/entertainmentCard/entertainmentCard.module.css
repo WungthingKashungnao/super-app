@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  height: 30%;
+}
+.container h4 {
+  color: #878787;
+  font-weight: 400;
+}
+.theItems {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}

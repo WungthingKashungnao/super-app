@@ -4,6 +4,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SelectCategory from "./pages/selectCategory/SelectCategory";
 import HomePage from "./pages/home/HomePage";
+import Entertainment from "./pages/entertainment/Entertainment";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Register />} />
           <Route path="/selectCategory" element={<SelectCategory />} />
           <Route path="/homePage" element={<HomePage />} />
+          <Route path="/entertainmentPage" element={<Entertainment />} />
         </Routes>
       </BrowserRouter>
     </div>

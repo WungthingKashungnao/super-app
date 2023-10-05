@@ -1,4 +1,21 @@
 import axios from "axios";
+const options = {
+  method: "GET",
+  url: "https://unogs-unogs-v1.p.rapidapi.com/static/genres",
+  headers: {
+    "X-RapidAPI-Key": "997d3f2a5bmsh7dadd759ef96e57p193f18jsn07e65f790fdb",
+    "X-RapidAPI-Host": "unogs-unogs-v1.p.rapidapi.com",
+  },
+};
+
+// function to fetch movies data from rapid api
+export const moviesApi = async () => {
+  const { data } = await axios.get(
+    `https://unogs-unogs-v1.p.rapidapi.com/static/genres`,
+    options
+  );
+  return data;
+};
 
 // function to fetch weather data from api
 export const weatherApi = async () => {

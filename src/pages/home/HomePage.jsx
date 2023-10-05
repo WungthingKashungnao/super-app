@@ -5,6 +5,7 @@ import { weatherApi, newsApi } from "../../utils/api";
 import pressureLogo from "./pressureLogo.png";
 import humidLogo from "./humidLogo.png";
 import windLogo from "./windLogo.png";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const userData = JSON.parse(localStorage.getItem("userInfo")); //getting user info
@@ -12,7 +13,7 @@ const HomePage = () => {
   const [notes, setNotes] = useState(""); //state to store notes
   const [weather, setWeather] = useState(); //state to store weather api
   const [news, setNews] = useState(); //state to store news api
-
+  const navigate = useNavigate();
   let apiNewsNo = Math.floor(Math.random() * 100); //generating random numbers to fetch random news
 
   // function to handle notes
@@ -146,7 +147,12 @@ const HomePage = () => {
         </div>
       </div>
       {/* right end */}
-      <button className={styles.browseBtn}>Browse</button>
+      <button
+        className={styles.browseBtn}
+        onClick={() => navigate("/entertainmentPage")}
+      >
+        Browse
+      </button>
     </div>
   );
 };
