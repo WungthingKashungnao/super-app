@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./homePage.module.css";
 import profilePicture from "./profilePicture.png";
-import { weatherApi } from "../../utils/api";
+import { weatherApi, newsApi } from "../../utils/api";
 import pressureLogo from "./pressureLogo.png";
 import humidLogo from "./humidLogo.png";
 import windLogo from "./windLogo.png";
@@ -11,6 +11,10 @@ const HomePage = () => {
   const userSavedCategory = JSON.parse(localStorage.getItem("SavedCategories")); //getting user saved categories
   const [notes, setNotes] = useState(""); //state to store notes
   const [weather, setWeather] = useState(); //state to store weather api
+  const [news, setNews] = useState(); //state to store news api
+
+  let apiNewsNo = Math.floor(Math.random() * 100); //generating random numbers to fetch random news
+
   // function to handle notes
   const handleNotes = (data) => {
     setNotes(data);
@@ -25,6 +29,9 @@ const HomePage = () => {
   const fetchApi = () => {
     weatherApi().then((data) => {
       setWeather(data);
+    });
+    newsApi().then((data) => {
+      setNews(data);
     });
   };
 
@@ -121,6 +128,22 @@ const HomePage = () => {
       {/* left end */}
       {/* right start */}
       <div className={styles.right}>
+        {/* `${news?.articles[0]?.urlToImage}` */}
+        <div className={styles.newsTop}>
+          <img src={news?.articles[apiNewsNo]?.urlToImage} alt="" />
+          <div className={styles.newsHeading}>
+            <div className={styles.newsTitle}>
+              <span>{news?.articles[apiNewsNo]?.title.slice(0, 70)}</span>
+            </div>
+            <div className={styles.newsDateTime}>
+              <span>{weather?.location?.localtime.split(" ")[0]}</span>
+              <span>{weather?.location?.localtime.split(" ")[1]}</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles.newsBot}>
+          {news?.articles[apiNewsNo]?.content}
+        </div>
         <button className={styles.browseBtn}>Browse</button>
       </div>
       {/* right end */}
