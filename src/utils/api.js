@@ -1,18 +1,9 @@
 import axios from "axios";
-const options = {
-  method: "GET",
-  url: "https://unogs-unogs-v1.p.rapidapi.com/static/genres",
-  headers: {
-    "X-RapidAPI-Key": "997d3f2a5bmsh7dadd759ef96e57p193f18jsn07e65f790fdb",
-    "X-RapidAPI-Host": "unogs-unogs-v1.p.rapidapi.com",
-  },
-};
 
-// function to fetch movies data from rapid api
-export const moviesApi = async () => {
+// function to fetch movies data from tmdb api
+export const moviesApi = async (genre) => {
   const { data } = await axios.get(
-    `https://unogs-unogs-v1.p.rapidapi.com/static/genres`,
-    options
+    `https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=${genre}`
   );
   return data;
 };
