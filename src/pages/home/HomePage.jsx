@@ -16,6 +16,8 @@ const HomePage = () => {
   const navigate = useNavigate();
   let apiNewsNo = Math.floor(Math.random() * 100); //generating random numbers to fetch random news
 
+  let timeSetter = weather?.location?.localtime.split(" ")[1].split(":")[0]; //getting only the time for weather api
+  let amPmSetter = parseInt(timeSetter);
   // function to handle notes
   const handleNotes = (data) => {
     setNotes(data);
@@ -54,6 +56,7 @@ const HomePage = () => {
                   <p>{userData.email}</p>
                   <h4>{userData.username}</h4>
                 </div>
+                {/* user selected categories start */}
                 <div className={styles.userCategory}>
                   {userSavedCategory &&
                     userSavedCategory.map((data) => (
@@ -62,6 +65,7 @@ const HomePage = () => {
                       </div>
                     ))}
                 </div>
+                {/* user selected categories end*/}
               </div>
             </div>
             {/* user info end*/}
@@ -69,7 +73,10 @@ const HomePage = () => {
             <div className={styles.weatherInfo}>
               <div className={styles.weatherDateTime}>
                 <h2>{weather?.location?.localtime.split(" ")[0]}</h2>
-                <h2>{weather?.location?.localtime.split(" ")[1]}</h2>
+                <h2>
+                  {weather?.location?.localtime.split(" ")[1]}{" "}
+                  {amPmSetter > 12 ? "PM" : "AM"}
+                </h2>
               </div>
               <div className={styles.weatherData}>
                 <div className={styles.weatherCodition}>
@@ -138,7 +145,10 @@ const HomePage = () => {
             </div>
             <div className={styles.newsDateTime}>
               <span>{weather?.location?.localtime.split(" ")[0]}</span>
-              <span>{weather?.location?.localtime.split(" ")[1]}</span>
+              <span>
+                {weather?.location?.localtime.split(" ")[1]}
+                {amPmSetter > 12 ? "PM" : "AM"}
+              </span>
             </div>
           </div>
         </div>
