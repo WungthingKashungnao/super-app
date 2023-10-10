@@ -1,0 +1,66 @@
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 2% 4%;
+  background-color: #1e2343;
+  display: flex;
+}
+.timerAimation {
+  flex: 1;
+  border: 3px solid red;
+}
+.timerSetting {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.timeSetngIndicator {
+  flex: 4;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.timerDisplay {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.timerDisplay h1 {
+  font-size: 1.5rem;
+  color: #949494;
+  font-weight: 400;
+}
+.timeSpecifier {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+.timeTeller {
+  font-size: 3rem;
+  font-weight: 300;
+  color: #ffffff;
+}
+.timerButton {
+  flex: 1;
+  width: 65%;
+}
+.timerButton button {
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+  font-weight: 400;
+  color: white;
+  background-color: #ff6a6a;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+}

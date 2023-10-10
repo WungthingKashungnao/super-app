@@ -6,6 +6,7 @@ import pressureLogo from "./pressureLogo.png";
 import humidLogo from "./humidLogo.png";
 import windLogo from "./windLogo.png";
 import { useNavigate } from "react-router-dom";
+import Timer from "../../components/timer/Timer";
 
 const HomePage = () => {
   const userData = JSON.parse(localStorage.getItem("userInfo")); //getting user info
@@ -130,7 +131,9 @@ const HomePage = () => {
         </div>
         {/* left top end */}
         {/* left bot start */}
-        <div className={styles.leftBot}></div>
+        <div className={styles.leftBot}>
+          <Timer />
+        </div>
         {/* left bot end */}
       </div>
       {/* left end */}
