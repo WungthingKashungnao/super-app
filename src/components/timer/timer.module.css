@@ -7,7 +7,9 @@
 }
 .timerAimation {
   flex: 1;
-  border: 3px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .timerSetting {
   flex: 2;
