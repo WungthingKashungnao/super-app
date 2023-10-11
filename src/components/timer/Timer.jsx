@@ -3,14 +3,32 @@ import upArrow from "./upArrow.png";
 import dwnArrow from "./downArrow.png";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useState } from "react";
+import useSound from "use-sound";
+import alarm from "./alarm.mp3";
 
 const Timer = () => {
+  // sound to be played when timer completes
+  const [playSound] = useSound(alarm);
   // state to hanlde time
   const [timeValue, setTimeValue] = useState({
     hr: 0,
     min: 0,
     sec: 0,
   });
+
+  // timer on the animation
+  const [realTime, setRealTime] = useState({
+    hr: 0,
+    min: 0,
+    sec: 0,
+  });
+
+  //function to handle timer on the animation
+  const setRealTimeHandle = () => {
+    if (timeValue.hr === 0 || timeValue.min === 0 || timeValue.sec === 0) {
+      setRealTime({ hr: timeValue.hr, min: timeValue.min, sec: timeValue.sec });
+    }
+  };
 
   // function to set the time
   const hanldeTimeValue = (type, opr) => {
@@ -55,19 +73,26 @@ const Timer = () => {
   };
 
   // time in seconds
-  const daySeconds = 86400;
-  const hourSeconds = 3600;
-  const minuteSeconds = 60;
+  // const daySeconds = timeValue.sec * 86400;
+  // const hourSeconds = timeValue.hr * 3600;
+  // const minuteSeconds = timeValue.min * 60;
 
-  const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
-  const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
-  const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
+  // total time on the animation
+  let totalTime = realTime.hr * 3600 + realTime.min * 60 + realTime.sec;
 
-  const renderTime = (dimension, time) => {
+  // const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
+  // const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
+  // const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
+
+  const displayTime = (elapsedTime) => {
     return (
-      <div className="time-wrapper">
-        <div className="time">{time}</div>
-        <div>{dimension}</div>
+      <div className={styles.timeDisplayer}>
+        {/* <span>{getTimeHours(hourSeconds - elapsedTime)} </span>
+        <span>{getTimeMinutes(minuteSeconds - elapsedTime)} </span>
+        <span>{getTimeSeconds(elapsedTime)}</span> */}
+        <span>{realTime.hr} : </span>
+        <span>{realTime.min} : </span>
+        <span>{realTime.sec}</span>
       </div>
     );
   };
@@ -81,14 +106,14 @@ const Timer = () => {
       <div className={styles.timerAimation}>
         <CountdownCircleTimer
           isPlaying
-          duration={daySeconds}
+          duration={totalTime}
           colors={"#FF6A6A"}
-          initialRemainingTime={remainingTime % daySeconds}
+          // initialRemainingTime={remainingTime % daySeconds}
+          initialRemainingTime={remainingTime % totalTime}
+          onComplete={() => playSound()}
         >
           {({ elapsedTime, color }) => (
-            <span style={{ color }}>
-              {renderTime("hours", getTimeHours(daySeconds - elapsedTime))}
-            </span>
+            <span style={{ color }}>{displayTime(elapsedTime)}</span>
           )}
         </CountdownCircleTimer>
       </div>
@@ -157,7 +182,7 @@ const Timer = () => {
           </div>
         </div>
         <div className={styles.timerButton}>
-          <button>Start</button>
+          <button onClick={() => setRealTimeHandle()}>Start</button>
         </div>
       </div>
       {/* timer settings end*/}
