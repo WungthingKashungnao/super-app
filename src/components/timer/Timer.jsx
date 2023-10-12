@@ -72,27 +72,16 @@ const Timer = () => {
     // setting time value for sec end
   };
 
-  // time in seconds
-  // const daySeconds = timeValue.sec * 86400;
-  // const hourSeconds = timeValue.hr * 3600;
-  // const minuteSeconds = timeValue.min * 60;
-
   // total time on the animation
   let totalTime = realTime.hr * 3600 + realTime.min * 60 + realTime.sec;
 
-  // const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
-  // const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
-  // const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
-
+  // function that displays the time inside the animation
   const displayTime = (elapsedTime) => {
     return (
       <div className={styles.timeDisplayer}>
-        {/* <span>{getTimeHours(hourSeconds - elapsedTime)} </span>
-        <span>{getTimeMinutes(minuteSeconds - elapsedTime)} </span>
-        <span>{getTimeSeconds(elapsedTime)}</span> */}
-        <span>{realTime.hr} : </span>
-        <span>{realTime.min} : </span>
-        <span>{realTime.sec}</span>
+        <span className={styles.animationTime}>{realTime.hr} : </span>
+        <span className={styles.animationTime}>{realTime.min} : </span>
+        <span className={styles.animationTime}>{realTime.sec}</span>
       </div>
     );
   };
@@ -108,7 +97,6 @@ const Timer = () => {
           isPlaying
           duration={totalTime}
           colors={"#FF6A6A"}
-          // initialRemainingTime={remainingTime % daySeconds}
           initialRemainingTime={remainingTime % totalTime}
           onComplete={() => playSound()}
         >

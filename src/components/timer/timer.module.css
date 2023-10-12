@@ -11,6 +11,11 @@
   justify-content: center;
   align-items: center;
 }
+.animationTime {
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+}
 .timerSetting {
   flex: 2;
   display: flex;
@@ -34,7 +39,7 @@
   align-items: center;
 }
 .timerDisplay h1 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #949494;
   font-weight: 400;
 }

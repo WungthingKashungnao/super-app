@@ -13,7 +13,11 @@ const Entertainment = () => {
           Super App
         </h2>
         <div className={styles.userProfile}>
-          <img src={profilePicture} alt="" />
+          <img
+            src={profilePicture}
+            alt=""
+            onClick={() => navigate("/homePage")}
+          />
         </div>
       </div>
       <div className={styles.entertainment}>

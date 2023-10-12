@@ -21,6 +21,9 @@
   font-weight: 400;
   cursor: pointer;
 }
+.userProfile img {
+  cursor: pointer;
+}
 .entertainment {
   flex: 8;
   width: 100%;
