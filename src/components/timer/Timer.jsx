@@ -25,7 +25,15 @@ const Timer = () => {
 
   //function to handle timer on the animation
   const setRealTimeHandle = () => {
-    if (timeValue.hr === 0 || timeValue.min === 0 || timeValue.sec === 0) {
+    if (timeValue.hr === 0 && timeValue.min === 0 && timeValue.sec === 0) {
+      return;
+    } else if (timeValue.sec === 0) {
+      setRealTime({ ...realTime, hr: timeValue.hr, min: timeValue.min });
+    } else if (timeValue.hr === 0) {
+      setRealTime({ ...realTime, min: timeValue.min, sec: timeValue.sec });
+    } else if (timeValue.min === 0) {
+      setRealTime({ ...realTime, hr: timeValue.hr, sec: timeValue.sec });
+    } else if (timeValue.hr !== 0 && timeValue.min && timeValue.sec !== 0) {
       setRealTime({ hr: timeValue.hr, min: timeValue.min, sec: timeValue.sec });
     }
   };
