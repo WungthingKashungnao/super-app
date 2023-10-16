@@ -106,7 +106,11 @@ const Timer = () => {
           duration={totalTime}
           colors={"#FF6A6A"}
           initialRemainingTime={remainingTime % totalTime}
-          onComplete={() => playSound()}
+          onComplete={() => {
+            playSound();
+            setRealTime({ hr: 0, min: 0, sec: 0 });
+            setTimeValue({ hr: 0, min: 0, sec: 0 });
+          }}
         >
           {({ elapsedTime, color }) => (
             <span style={{ color }}>{displayTime(elapsedTime)}</span>
